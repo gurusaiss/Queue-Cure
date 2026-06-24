@@ -1,0 +1,20 @@
+{
+  "name": "queue-cure-server",
+  "version": "1.0.0",
+  "description": "Queue Cure '26 — Real-time clinic queue management backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "socket.io-client": "^4.8.3"
+  }
+}
