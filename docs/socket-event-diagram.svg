@@ -1,0 +1,141 @@
+<svg viewBox="0 0 900 720" xmlns="http://www.w3.org/2000/svg" role="img" font-family="Inter, system-ui, sans-serif">
+  <title>Queue Cure — Socket Event Diagram</title>
+  <desc>Socket.io event flow between Receptionist, Server, and Patient screens</desc>
+
+  <!-- Background -->
+  <rect width="900" height="720" fill="#0f172a" rx="16"/>
+
+  <!-- Title -->
+  <text x="450" y="42" text-anchor="middle" fill="#f1f5f9" font-size="20" font-weight="700" letter-spacing="-0.5">Queue Cure — Socket Event Diagram</text>
+  <text x="450" y="64" text-anchor="middle" fill="#64748b" font-size="12">Real-time WebSocket communication via Socket.io</text>
+
+  <!-- Column Headers -->
+  <rect x="30" y="82" width="190" height="56" rx="12" fill="#064e3b" stroke="#10b981" stroke-width="1.5"/>
+  <text x="125" y="107" text-anchor="middle" fill="#34d399" font-size="13" font-weight="700">RECEPTIONIST</text>
+  <text x="125" y="125" text-anchor="middle" fill="#6ee7b7" font-size="10">room: "receptionist"</text>
+
+  <rect x="355" y="82" width="190" height="56" rx="12" fill="#1e1b4b" stroke="#818cf8" stroke-width="1.5"/>
+  <text x="450" y="107" text-anchor="middle" fill="#a5b4fc" font-size="13" font-weight="700">SERVER</text>
+  <text x="450" y="125" text-anchor="middle" fill="#c7d2fe" font-size="10">Node.js + Socket.io</text>
+
+  <rect x="680" y="82" width="190" height="56" rx="12" fill="#0c2461" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="775" y="107" text-anchor="middle" fill="#60a5fa" font-size="13" font-weight="700">PATIENT</text>
+  <text x="775" y="125" text-anchor="middle" fill="#93c5fd" font-size="10">room: "patient"</text>
+
+  <!-- Column center lines -->
+  <line x1="125" y1="138" x2="125" y2="690" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <line x1="450" y1="138" x2="450" y2="690" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <line x1="775" y1="138" x2="775" y2="690" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <!-- CONNECT -->
+  <text x="30" y="172" fill="#475569" font-size="10" font-weight="600" letter-spacing="1">CONNECT</text>
+  <line x1="30" y1="178" x2="870" y2="178" stroke="#1e293b" stroke-width="1"/>
+  <line x1="125" y1="198" x2="445" y2="198" stroke="#10b981" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <rect x="185" y="185" width="180" height="18" rx="4" fill="#0f172a"/>
+  <text x="275" y="197" text-anchor="middle" fill="#34d399" font-size="10" font-weight="600">connect (role=receptionist)</text>
+  <line x1="775" y1="218" x2="460" y2="218" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+  <rect x="535" y="205" width="170" height="18" rx="4" fill="#0f172a"/>
+  <text x="620" y="217" text-anchor="middle" fill="#60a5fa" font-size="10" font-weight="600">connect (role=patient)</text>
+  <line x1="450" y1="238" x2="135" y2="238" stroke="#818cf8" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+  <line x1="450" y1="248" x2="765" y2="248" stroke="#818cf8" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+  <rect x="175" y="225" width="150" height="18" rx="4" fill="#0f172a"/>
+  <text x="250" y="237" text-anchor="middle" fill="#a5b4fc" font-size="10">receptionist_state</text>
+  <rect x="480" y="235" width="120" height="18" rx="4" fill="#0f172a"/>
+  <text x="540" y="247" text-anchor="middle" fill="#a5b4fc" font-size="10">queue_state</text>
+
+  <!-- ADD PATIENT -->
+  <text x="30" y="278" fill="#475569" font-size="10" font-weight="600" letter-spacing="1">ADD PATIENT</text>
+  <line x1="30" y1="284" x2="870" y2="284" stroke="#1e293b" stroke-width="1"/>
+  <line x1="125" y1="304" x2="445" y2="304" stroke="#10b981" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <rect x="160" y="291" width="200" height="18" rx="4" fill="#0f172a"/>
+  <text x="260" y="303" text-anchor="middle" fill="#34d399" font-size="10" font-weight="600">add_patient {name, phone}</text>
+  <line x1="445" y1="320" x2="125" y2="320" stroke="#10b981" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#arr-green-sm)"/>
+  <rect x="210" y="307" width="160" height="18" rx="4" fill="#0f172a"/>
+  <text x="290" y="319" text-anchor="middle" fill="#6ee7b7" font-size="10">ack {ok, token: "T001"}</text>
+  <line x1="450" y1="338" x2="135" y2="338" stroke="#818cf8" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+  <line x1="450" y1="338" x2="765" y2="338" stroke="#818cf8" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+  <rect x="155" y="325" width="155" height="18" rx="4" fill="#0f172a"/>
+  <text x="232" y="337" text-anchor="middle" fill="#a5b4fc" font-size="10">receptionist_state</text>
+  <rect x="490" y="325" width="110" height="18" rx="4" fill="#0f172a"/>
+  <text x="545" y="337" text-anchor="middle" fill="#a5b4fc" font-size="10">queue_state</text>
+
+  <!-- CALL NEXT -->
+  <text x="30" y="368" fill="#475569" font-size="10" font-weight="600" letter-spacing="1">CALL NEXT</text>
+  <line x1="30" y1="374" x2="870" y2="374" stroke="#1e293b" stroke-width="1"/>
+  <line x1="125" y1="394" x2="445" y2="394" stroke="#10b981" stroke-width="1.5" marker-end="url(#arr-green)"/>
+  <rect x="195" y="381" width="130" height="18" rx="4" fill="#0f172a"/>
+  <text x="260" y="393" text-anchor="middle" fill="#34d399" font-size="10" font-weight="600">call_next</text>
+  <line x1="445" y1="410" x2="125" y2="410" stroke="#10b981" stroke-width="1" stroke-dasharray="5,3" marker-end="url(#arr-green-sm)"/>
+  <rect x="205" y="397" width="155" height="18" rx="4" fill="#0f172a"/>
+  <text x="282" y="409" text-anchor="middle" fill="#6ee7b7" font-size="10">ack {ok, token: "T001"}</text>
+  <rect x="32" y="420" width="836" height="24" rx="6" fill="#451a03" stroke="#f97316" stroke-width="1"/>
+  <line x1="450" y1="432" x2="140" y2="432" stroke="#f97316" stroke-width="2" marker-end="url(#arr-orange)"/>
+  <line x1="450" y1="432" x2="760" y2="432" stroke="#f97316" stroke-width="2" marker-end="url(#arr-orange)"/>
+  <text x="450" y="436" text-anchor="middle" fill="#fb923c" font-size="10" font-weight="700">token_called {token, name, calledAt}  →  BROADCAST TO ALL  (triggers audio + visual alert)</text>
+  <line x1="450" y1="456" x2="135" y2="456" stroke="#818cf8" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+  <line x1="450" y1="456" x2="765" y2="456" stroke="#818cf8" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+  <rect x="155" y="443" width="155" height="18" rx="4" fill="#0f172a"/>
+  <text x="232" y="455" text-anchor="middle" fill="#a5b4fc" font-size="10">receptionist_state</text>
+  <rect x="490" y="443" width="110" height="18" rx="4" fill="#0f172a"/>
+  <text x="545" y="455" text-anchor="middle" fill="#a5b4fc" font-size="10">queue_state</text>
+
+  <!-- OTHER EVENTS -->
+  <text x="30" y="486" fill="#475569" font-size="10" font-weight="600" letter-spacing="1">OTHER EVENTS</text>
+  <line x1="30" y1="492" x2="870" y2="492" stroke="#1e293b" stroke-width="1"/>
+  <line x1="125" y1="510" x2="445" y2="510" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+  <rect x="148" y="497" width="205" height="18" rx="4" fill="#0f172a"/>
+  <text x="250" y="509" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="600">set_avg_time {minutes: 7}</text>
+  <line x1="125" y1="532" x2="445" y2="532" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+  <rect x="190" y="519" width="160" height="18" rx="4" fill="#0f172a"/>
+  <text x="270" y="531" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="600">toggle_break → break mode</text>
+  <line x1="125" y1="554" x2="445" y2="554" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+  <rect x="168" y="541" width="190" height="18" rx="4" fill="#0f172a"/>
+  <text x="263" y="553" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="600">priority_bump {id} → front of queue</text>
+  <line x1="125" y1="576" x2="445" y2="576" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-amber)"/>
+  <rect x="165" y="563" width="195" height="18" rx="4" fill="#0f172a"/>
+  <text x="262" y="575" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="600">remove_patient {id} → no-show</text>
+  <line x1="450" y1="590" x2="135" y2="590" stroke="#818cf8" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+  <line x1="450" y1="590" x2="765" y2="590" stroke="#818cf8" stroke-width="1.5" marker-end="url(#arr-purple)"/>
+  <text x="450" y="607" text-anchor="middle" fill="#64748b" font-size="10">All events → broadcast receptionist_state + queue_state to both rooms</text>
+
+  <!-- ETA Box -->
+  <rect x="30" y="622" width="840" height="80" rx="10" fill="#0d1f12" stroke="#10b981" stroke-width="1"/>
+  <text x="50" y="643" fill="#34d399" font-size="11" font-weight="700">ETA Algorithm (server-side, never hardcoded)</text>
+  <text x="50" y="661" fill="#6ee7b7" font-size="10" font-family="monospace">rollingAvg  =  mean of gaps between last 10 call_next timestamps  (ms → minutes)</text>
+  <text x="50" y="677" fill="#6ee7b7" font-size="10" font-family="monospace">effectiveAvg =  &lt;3 calls → config  |  3–5 calls → 50/50 blend  |  6+ calls → rollingAvg</text>
+  <text x="50" y="693" fill="#6ee7b7" font-size="10" font-family="monospace">patientWait  =  position  ×  effectiveAvg                          → sent in every queue_state</text>
+
+  <!-- Legend -->
+  <rect x="560" y="496" width="300" height="90" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="575" y="514" fill="#94a3b8" font-size="10" font-weight="700">LEGEND</text>
+  <line x1="575" y1="526" x2="605" y2="526" stroke="#10b981" stroke-width="2" marker-end="url(#arr-green)"/>
+  <text x="612" y="530" fill="#94a3b8" font-size="10">Receptionist → Server</text>
+  <line x1="575" y1="544" x2="605" y2="544" stroke="#818cf8" stroke-width="2" marker-end="url(#arr-purple)"/>
+  <text x="612" y="548" fill="#94a3b8" font-size="10">Server → Client (broadcast)</text>
+  <line x1="575" y1="562" x2="605" y2="562" stroke="#f97316" stroke-width="2" marker-end="url(#arr-orange)"/>
+  <text x="612" y="566" fill="#94a3b8" font-size="10">token_called → ALL clients</text>
+  <line x1="575" y1="578" x2="605" y2="578" stroke="#f59e0b" stroke-width="2" marker-end="url(#arr-amber)"/>
+  <text x="612" y="582" fill="#94a3b8" font-size="10">Receptionist actions (misc)</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arr-green" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#10b981"/>
+    </marker>
+    <marker id="arr-green-sm" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#10b981"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arr-purple" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#818cf8"/>
+    </marker>
+    <marker id="arr-orange" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f97316"/>
+    </marker>
+    <marker id="arr-amber" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f59e0b"/>
+    </marker>
+  </defs>
+</svg>
