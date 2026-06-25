@@ -3,9 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
   body {
     @apply bg-slate-950 text-slate-100 antialiased;
     font-family: 'Inter', system-ui, sans-serif;
@@ -16,80 +14,147 @@
   .card {
     @apply bg-slate-900 border border-slate-800 rounded-2xl;
   }
+
+  /* Primary — Call Next, Add Patient */
   .btn-primary {
-    @apply bg-emerald-500 hover:bg-emerald-400 active:scale-95 text-white font-semibold
-           px-6 py-3 rounded-xl transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed
-           disabled:active:scale-100 shadow-lg shadow-emerald-500/20;
+    @apply bg-emerald-500 text-white font-semibold px-6 py-3 rounded-xl
+           shadow-lg shadow-emerald-500/20
+           disabled:opacity-40 disabled:cursor-not-allowed;
+    transition: background-color 120ms ease, transform 80ms ease, box-shadow 120ms ease;
   }
+  .btn-primary:hover:not(:disabled) {
+    @apply bg-emerald-400;
+    box-shadow: 0 0 0 0 #10b98100, 0 4px 20px #10b98140;
+  }
+  .btn-primary:active:not(:disabled) {
+    transform: scale(0.96);
+    @apply bg-emerald-600;
+    box-shadow: 0 1px 4px #10b98130;
+    transition: background-color 60ms ease, transform 60ms ease, box-shadow 60ms ease;
+  }
+
+  /* Secondary — QR, Set, Track */
   .btn-secondary {
-    @apply bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 font-medium
-           px-4 py-2.5 rounded-xl transition-all duration-150 border border-slate-700;
+    @apply bg-slate-800 text-slate-200 font-medium px-4 py-2.5 rounded-xl border border-slate-700;
+    transition: background-color 120ms ease, transform 80ms ease, border-color 120ms ease;
   }
-  .btn-danger {
-    @apply bg-red-500/10 hover:bg-red-500/20 active:scale-95 text-red-400 font-medium
-           px-4 py-2.5 rounded-xl transition-all duration-150 border border-red-500/30;
+  .btn-secondary:hover {
+    @apply bg-slate-700 border-slate-600;
   }
+  .btn-secondary:active {
+    transform: scale(0.95);
+    @apply bg-slate-600;
+    transition: background-color 60ms ease, transform 60ms ease;
+  }
+
+  /* Break — amber toggle */
+  .btn-break {
+    @apply flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-xl border;
+    transition: background-color 150ms ease, border-color 150ms ease, transform 80ms ease, color 150ms ease;
+  }
+  .btn-break:active {
+    transform: scale(0.95);
+    transition: transform 60ms ease;
+  }
+  .btn-break.off {
+    @apply bg-slate-800 border-slate-700 text-slate-300;
+  }
+  .btn-break.off:hover {
+    @apply bg-slate-700 border-slate-600 text-slate-100;
+  }
+  .btn-break.on {
+    @apply bg-amber-500/25 border-amber-400/60 text-amber-300;
+    box-shadow: 0 0 12px #f59e0b30;
+  }
+  .btn-break.on:hover {
+    @apply bg-amber-500/35 border-amber-400/80;
+  }
+
+  /* Icon-only action buttons (trash, priority) */
+  .btn-icon {
+    @apply p-1.5 rounded-lg text-slate-500;
+    transition: background-color 100ms ease, color 100ms ease, transform 80ms ease;
+  }
+  .btn-icon:hover  { @apply bg-slate-700 text-slate-200; }
+  .btn-icon:active { transform: scale(0.88); }
+  .btn-icon.danger:hover  { @apply bg-red-500/15 text-red-400; }
+  .btn-icon.priority:hover { @apply bg-amber-500/15 text-amber-400; }
+
+  /* Input */
   .input {
     @apply bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-slate-100
-           placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50
-           focus:border-emerald-500/50 transition-all duration-150 w-full;
+           placeholder:text-slate-500 w-full;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+    outline: none;
   }
-  .token-display {
-    @apply font-mono font-black tracking-wider text-center;
-    font-size: clamp(3rem, 12vw, 8rem);
-    line-height: 1;
-    text-shadow: 0 0 40px currentColor;
+  .input:focus {
+    @apply border-emerald-500/60;
+    box-shadow: 0 0 0 3px #10b98118;
   }
+
   .badge {
     @apply text-xs font-semibold px-2.5 py-1 rounded-full;
   }
 }
 
-/* Flip animation for token change */
+/* ── Token flip animation ── */
 @keyframes tokenFlip {
-  0% { transform: perspective(400px) rotateX(0); opacity: 1; }
-  40% { transform: perspective(400px) rotateX(-90deg); opacity: 0; }
-  60% { transform: perspective(400px) rotateX(90deg); opacity: 0; }
-  100% { transform: perspective(400px) rotateX(0); opacity: 1; }
+  0%   { transform: perspective(400px) rotateX(0);    opacity: 1; }
+  40%  { transform: perspective(400px) rotateX(-90deg); opacity: 0; }
+  60%  { transform: perspective(400px) rotateX(90deg);  opacity: 0; }
+  100% { transform: perspective(400px) rotateX(0);    opacity: 1; }
 }
-.token-flip {
-  animation: tokenFlip 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
+.token-flip { animation: tokenFlip 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
 
-/* Glow pulse for active token */
+/* ── Glow pulse ── */
 @keyframes glowPulse {
   0%, 100% { filter: drop-shadow(0 0 20px #10b981) drop-shadow(0 0 40px #10b98160); }
-  50% { filter: drop-shadow(0 0 30px #34d399) drop-shadow(0 0 60px #34d39980); }
+  50%       { filter: drop-shadow(0 0 30px #34d399) drop-shadow(0 0 60px #34d39980); }
 }
-.glow-pulse {
-  animation: glowPulse 2s ease-in-out infinite;
-}
+.glow-pulse { animation: glowPulse 2s ease-in-out infinite; }
 
-/* Slide in animation */
+/* ── Slide in (queue rows, toasts) ── */
 @keyframes slideInUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-.slide-in-up {
-  animation: slideInUp 0.3s ease-out forwards;
-}
+.slide-in-up { animation: slideInUp 0.25s ease-out forwards; }
 
-/* Ping ring for alert */
-@keyframes pingRing {
-  75%, 100% { transform: scale(2); opacity: 0; }
+/* ── Toast slide in from right ── */
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
+@keyframes toastOut {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(24px); }
+}
+.toast-enter { animation: toastIn 0.22s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.toast-exit  { animation: toastOut 0.18s ease-in forwards; }
 
-/* Scrollbar styling */
-::-webkit-scrollbar { width: 6px; }
+/* ── Call Next pulse (when patients waiting) ── */
+@keyframes callPulse {
+  0%, 100% { box-shadow: 0 4px 20px #10b98140; }
+  50%       { box-shadow: 0 4px 32px #10b98170, 0 0 0 4px #10b98118; }
+}
+.btn-call-ready { animation: callPulse 2s ease-in-out infinite; }
+
+/* ── Break banner slide down ── */
+@keyframes bannerIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.banner-in { animation: bannerIn 0.2s ease-out; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-/* Number ticker */
+/* ── Number tick ── */
 @keyframes numberTick {
-  0% { transform: translateY(-100%); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
+  0%   { transform: translateY(-60%); opacity: 0; }
+  100% { transform: translateY(0);    opacity: 1; }
 }
-.number-tick {
-  animation: numberTick 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
+.number-tick { animation: numberTick 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
